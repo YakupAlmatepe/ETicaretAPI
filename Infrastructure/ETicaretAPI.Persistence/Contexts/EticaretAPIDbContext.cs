@@ -21,7 +21,7 @@ namespace ETicaretAPI.Persistence.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker
                  .Entries<BaseEntity>();
@@ -29,11 +29,11 @@ namespace ETicaretAPI.Persistence.Contexts
             {
                 _ = data.State switch
                 {
-                    EntityState.Added => data.Entity.CreatedDate =DateTime.UtcNow,
+                    EntityState.Added => data.Entity.CreatedDate =DateTime.UtcNow,//veri savechange tetiklendiğinde yakalanan dataları yakalayarak sql sorgularını oluşturacağız
                     EntityState.Modified =>data.Entity.UpdatedDate = DateTime.UtcNow,
                 };
             }
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
     }

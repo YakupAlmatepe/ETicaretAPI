@@ -9,7 +9,7 @@ namespace ETicaretAPI.Domain.Entities
 {
     public class Order : BaseEntity
     {
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public string Description { get; set; }
         public string Adress { get; set; }//bir müşterinin sabit adresi olmadığını düşünerek
         public ICollection<Product> Products { get; set; }//bir order 1den fazla product var (çoka çok ilişki için)
