@@ -14,10 +14,10 @@ namespace ETicaretAPI.Persistence
     {
         public EticaretAPIDbContext CreateDbContext(string[] args)
         {
-           
+
             DbContextOptionsBuilder<EticaretAPIDbContext> dbContextOptionsBuilder = new();
             dbContextOptionsBuilder.UseNpgsql(Configuration.ConnectionString);
-            return new EticaretAPIDbContext(dbContextOptionsBuilder.Options);
+            return new (dbContextOptionsBuilder.Options);
         }
     }
 }
