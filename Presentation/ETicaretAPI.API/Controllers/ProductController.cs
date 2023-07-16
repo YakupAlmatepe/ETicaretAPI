@@ -54,7 +54,7 @@ namespace ETicaretAPI.API.Controllers
             await _orderWriteRepository.AddAsync(new() { Description = "b blaaa", Adress = "Bursa, Fakülte", CustomerId = customId });
             await _orderWriteRepository.SaveAsync();
 
-        }
+        }//
         //[HttpGet("{id}")]
         //public async Task<IActionResult> Get(string id)
         //{
