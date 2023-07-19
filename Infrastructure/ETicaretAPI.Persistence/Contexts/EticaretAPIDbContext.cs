@@ -31,6 +31,7 @@ namespace ETicaretAPI.Persistence.Contexts
                 {
                     EntityState.Added => data.Entity.CreatedDate =DateTime.UtcNow,//veri savechange tetiklendiğinde yakalanan dataları yakalayarak sql sorgularını oluşturacağız
                     EntityState.Modified =>data.Entity.UpdatedDate = DateTime.UtcNow,
+                   _ => DateTime.UtcNow
                 };
             }
             return await base.SaveChangesAsync(cancellationToken);
