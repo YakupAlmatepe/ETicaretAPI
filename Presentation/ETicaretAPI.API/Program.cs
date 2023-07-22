@@ -1,4 +1,5 @@
 using ETicaretAPI.Application.Validator.Products;
+using ETicaretAPI.Infrastructure;
 using ETicaretAPI.Infrastructure.Filter;
 using ETicaretAPI.Persistence;
 using FluentValidation.AspNetCore;
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddPersistenceServices();//Service regestration iþlemi için çaÐIRDIK
+
+builder.Services.AddInfrastructureServices();
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("http://localhost:4200", "https://localhost4200").AllowAnyHeader().AllowAnyMethod()));
 builder.Services.AddControllers(opt=>opt.Filters.Add<ValidationFilter>()).AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>())//fluent validationslarý uygulamasýný belirttik
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true) ;//core da gelen defoult fluentleri kendi fluentlerimize özelleþtirdik(controllera sormadan cliente döndürmesin, controllerdaki fluentlere sorsun ona göre cliente döndürsün)
@@ -23,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();//gönderilen dosyalarý tutmak için kullanýlýr wwwrootta bulunan yüklemeler
 app.UseCors();
 app.UseHttpsRedirection();
 
